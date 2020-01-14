@@ -13,8 +13,23 @@ export class TasksResolver {
         return this.tasksService.getTasks();
     }
 
+    @Query(() => TaskType)
+    async task(@Args('id') idTask: string) {
+        return this.tasksService.getTask(idTask);
+    }
+
     @Mutation(() => TaskType)
     async createTask(@Args('input') task: TaskInput) {
         return this.tasksService.createTask(task);
+    }
+
+    @Mutation(() => TaskType)
+    async updateTask(@Args('input') task: TaskInput, @Args('id') idTask: string) {
+        return this.tasksService.editTask(idTask, task);
+    }
+
+    @Mutation(() => TaskType)
+    async deleteTask(@Args('id') idTask: string) {
+        return this.tasksService.deleteTask(idTask);
     }
 }
